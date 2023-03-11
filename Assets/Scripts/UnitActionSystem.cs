@@ -8,6 +8,7 @@ public class UnitActionSystem : MonoBehaviour
 {
     public static UnitActionSystem Instance { get; private set; }
     public event EventHandler OnSelectedUnitChanged;
+    public event EventHandler OnSelectedActionChanged;
 
     [SerializeField] private Unit selectedUnit;
     [SerializeField] private LayerMask unitsLayerMask;
@@ -106,6 +107,8 @@ public class UnitActionSystem : MonoBehaviour
 
     public void SetSelectedAction(BaseAction action) {
         selectedAction = action;
+
+        OnSelectedActionChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public BaseAction GetSelectedAction() {
